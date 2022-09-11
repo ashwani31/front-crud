@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams, useNavigate } from 'react-router-dom'
 
 
 const AddProduct = () => {
@@ -7,6 +8,7 @@ const AddProduct = () => {
     const [category, setCategory] = useState('');
     const [company, setCompany] = useState('');
     const [error ,setError] = useState(false);
+    const navigate = useNavigate();
 
     const addProduct = async () =>{
 
@@ -19,7 +21,7 @@ const AddProduct = () => {
         // console.warn(name,price,category,company);
         const userId = JSON.parse(localStorage.getItem('user'))._id;
         // console.warn(userId);
-        let result = await fetch("http://localhost:4000/add-product",{
+        let result = await fetch("https://crud-app-anu.herokuapp.com/add-product",{
             method:"post",
             body:JSON.stringify({name , price, category, company,userId}),
             headers:{
@@ -28,6 +30,9 @@ const AddProduct = () => {
         });
         result = await result.json();
         console.warn(result)
+        if (result) {
+            navigate('/')
+        }
     }
 
     return (

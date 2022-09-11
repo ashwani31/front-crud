@@ -8,7 +8,7 @@ const ProductList = () => {
     }, []);
 
     const getProducts = async () => {
-        let result = await fetch('http://localhost:4000/products');
+        let result = await fetch('https://crud-app-anu.herokuapp.com/products');
         result = await result.json();
         setProducts(result);
 
@@ -17,7 +17,7 @@ const ProductList = () => {
 
     const deleteProduct = async (id) => {
         console.warn(id)
-        let result = await fetch(`http://localhost:4000/product/${id}`, {
+        let result = await fetch(`https://crud-app-anu.herokuapp.com/product/${id}`, {
             method: "Delete"
         });
         result = await result.json();
@@ -29,7 +29,7 @@ const ProductList = () => {
     const searchHandle = async (event)=>{
         let key = event.target.value;
         if(key){
-            let result = await fetch(`http://localhost:4000/search/${key}`);
+            let result = await fetch(`https://crud-app-anu.herokuapp.com/search/${key}`);
             result = await result.json()
             if(result){
                 setProducts(result)
